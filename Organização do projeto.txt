@@ -1,0 +1,23 @@
+ENTIDADES:
+
+- Products(Price, Description, AvailableQuantity, PriceId, Name): O produto transforma-se em item, durante o processo de AddItem (método implementado pelo BasketServices;
+
+- Basket (BasketId, List<Item> Items, TotalValue, UserId): Cada user só possui 1 único basket. A criação do basket se dá ao mesmo tempo em que o user é criado (CreateUser, implementado pelo UserServices).
+	Implementação:
+	- AddItem (Product product, Quantity quantity, int UserId): recebe um Product e um UserId. O product é convertido em um Item genérico e esse item é inserido na lista de itens do basket cujo BasketId = UserId. Vou apenas atualizando cada lista a cada AddItem();
+				public Item _item;
+				_item.Price = product.Price;
+				_item.Quantity = quantity;
+				_item.Name = product.Name;
+				Basket.Items.Add(_item);
+	- PrepareToOrder(): Instancio Order, insiro a lista Items no objeto:
+				_order.Items = Basket.Items;
+				_order.UserId = Basket.userId;
+				_order.TotalValue = Basket.TotalVolue;
+				OrderServices 	
+				
+	- ClearBasket (): limpo o carrinho de compras. Aquele carrinho não vai ser apagado da memória, apenas os seus valores. Ele ainda vai permanecer com o mesmo Id. O ClearBasket é dado toda vez que eu dou o comando CreateOrder(Order);
+  
+- Item (Price, Quantity, Name): o produto transforma-se em item atravez do AddItem. Vou implementar esse método BasketServices. O Item não possui implementação.
+
+- Order
